@@ -1,0 +1,105 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background: linear-gradient(135deg, #23243a 0%, #2b5876 100%);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+  backdrop-filter: blur(2px);
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 24px;
+  color: #00ffd5;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 16px #00ffd588, 0 1px 0 #222;
+}
+
+.stopwatch {
+  background: rgba(44, 44, 66, 0.85);
+  padding: 40px 32px 32px 32px;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 1.5px 0 #00ffd5;
+  border: 1.5px solid rgba(0,255,213,0.15);
+  backdrop-filter: blur(8px);
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+#display {
+  font-size: 3.2rem;
+  margin-bottom: 28px;
+  letter-spacing: 3px;
+  color: #fff;
+  text-shadow: 0 2px 16px #00ffd588, 0 1px 0 #222;
+  font-variant-numeric: tabular-nums;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.buttons button {
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #00ffd5 0%, #00bba1 100%);
+  color: #23243a;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,255,213,0.12);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  outline: none;
+}
+
+.buttons button:hover, .buttons button:focus {
+  background: linear-gradient(90deg, #00bba1 0%, #00ffd5 100%);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 16px rgba(0,255,213,0.18);
+}
+
+#laps {
+  list-style: none;
+  padding: 0;
+  margin-top: 24px;
+  max-height: 180px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #00ffd5 #23243a;
+}
+
+#laps li {
+  background: rgba(0,255,213,0.08);
+  margin: 7px 0;
+  padding: 10px 0;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1.1rem;
+  box-shadow: 0 1px 6px rgba(0,255,213,0.08);
+  border-left: 4px solid #00ffd5;
+  transition: background 0.2s;
+}
+
+#laps li:nth-child(odd) {
+  background: rgba(0,255,213,0.16);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #00ffd5;
+  border-radius: 8px;
+}
+  

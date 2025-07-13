@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stopwatch App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="container">
+    <div style="display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:10px;">
+      <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Stopwatch Icon" style="vertical-align:middle;"><circle cx="19" cy="19" r="18" stroke="#00ffd5" stroke-width="3" fill="#23243a"/><rect x="17" y="7" width="4" height="8" rx="2" fill="#00ffd5"/><circle cx="19" cy="19" r="7" stroke="#00ffd5" stroke-width="2"/><circle cx="19" cy="19" r="3" fill="#00ffd5"/></svg>
+      <h1 style="margin:0;">Stopwatch</h1>
+    </div>
+    <div class="stopwatch" aria-label="Stopwatch display and controls">
+      <div id="display" aria-live="polite">00:00:00</div>
+      <div class="buttons">
+        <button id="start" aria-label="Start the stopwatch">Start</button>
+        <button id="pause" aria-label="Pause the stopwatch">Pause</button>
+        <button id="reset" aria-label="Reset the stopwatch">Reset</button>
+        <button id="lap" aria-label="Record a lap">Lap</button>
+      </div>
+      <ul id="laps" aria-label="Lap times"></ul>
+    </div>
+    <div style="margin-top:32px;opacity:0.7;font-size:0.95rem;letter-spacing:1px;">
+      <span>⏱️ Enjoy your time tracking!</span>
+    </div>
+  </div>
+
+  <script>
+    let timer;
+    let [hours, minutes, seconds] = [0, 0, 0];
+
+    const display = document.getElementById("display");
+    const laps = document.getElementById("laps");
+
+    function updateDisplay() {
+      const h = String(hours).padStart(2, '0');
+      const m = String(minutes).padStart(2, '0');
+      const s = String(seconds).padStart(2, '0');
+      display.innerText = `${h}:${m}:${s}`;
+    }
+
+    function startTimer() {
+      if (!timer) {
+        timer = setInterval(() => {
+          seconds++;
+          if (seconds === 60) {
+            seconds = 0;
+            minutes++;
+            if (minutes === 60) {
+              minutes = 0;
+              hours++;
+            }
+          }
+          updateDisplay();
+        }, 1000);
+      }
+    }
+
+    function pauseTimer() {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    function resetTimer() {
+      pauseTimer();
+      [hours, minutes, seconds] = [0, 0, 0];
+      updateDisplay();
+      laps.innerHTML = "";
+    }
+
+    function recordLap() {
+      const li = document.createElement("li");
+      li.textContent = display.textContent;
+      laps.appendChild(li);
+    }
+
+    document.getElementById("start").onclick = startTimer;
+    document.getElementById("pause").onclick = pauseTimer;
+    document.getElementById("reset").onclick = resetTimer;
+    document.getElementById("lap").onclick = recordLap;
+
+    updateDisplay();
+  </script>
+
+</body>
+</html>
